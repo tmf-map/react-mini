@@ -63,3 +63,7 @@ typings/
 # parcel
 .cache
 dist
+
+# IDE
+.vscode
+.idea
