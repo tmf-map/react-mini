@@ -1,10 +1,12 @@
-function render(vNode, $container) {
+import { createReactCompositeComponent, componentToRealDOMWithLifeCycle } from './ReactCompositeComponent';
+
+export function render(vNode, $container) {
   // 防止多次调用render方法，要先清除之前的内容
   $container.innerHTML = ''
   $container.appendChild(toRealDOM(vNode))
 }
 
-function toRealDOM(vNode) {
+export function toRealDOM (vNode) {
   // 创建真实节点
   let $dom = createRealNode(vNode)
   // 设置节点属性
@@ -24,13 +26,20 @@ function toRealDOM(vNode) {
 }
 
 function createRealNode(vNode) {
-  let $node
-  if (typeof vNode === 'string') {
-    $node = document.createTextNode(vNode)
-  } else {
-    $node = document.createElement(vNode.type)
+  // 注意不要遗漏 number 类型
+  if (typeof vNode === 'string' || typeof vNode === 'number') {
+    return document.createTextNode(vNode)
   }
-  return $node
+  // 自定义组件(包括class和function)
+  if (typeof vNode.type === 'function') {
+    // component 即自定义组件的实例
+    const component = createReactCompositeComponent(vNode.type, vNode.props)
+    // 生成 component.$dom
+    componentToRealDOMWithLifeCycle(component)
+    // 自定义组件的对应的真实dom
+    return component.$dom
+  }
+  return document.createElement(vNode.type)
 }
 
 function setProps($target, name, value) {

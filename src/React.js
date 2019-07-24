@@ -1,3 +1,5 @@
+import { Component } from './ReactCompositeComponent';
+
 function createElement(type, props, ...children) {
   const vdom = {
     type,
@@ -13,5 +15,6 @@ function createElement(type, props, ...children) {
 }
 
 export default {
-  createElement
+  createElement,
+  Component
 }
