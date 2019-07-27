@@ -1,5 +1,5 @@
-import React from './React'
-import { toRealDOM } from './ReactDOM';
+import React from '../react'
+import { toRealDOM } from './render';
 
 export class Component {
   constructor (props = {}) {
@@ -33,6 +33,7 @@ function componentToRealDOM (component) {
   // class 类型render参数为空
   let $dom = toRealDOM(component.render(component.props))
   // update $dom
+  // todo: diff
   if (component.$dom && component.$dom.parentNode) {
     component.$dom.parentNode.replaceChild($dom, component.$dom)
   }
