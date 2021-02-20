@@ -1,5 +1,5 @@
-import React from '../src/React'
-import ReactDOM from '../src/ReactDOM'
+import React from '../src/react'
+import ReactDOM from '../src/react-dom'
 
 const  Welcome = props => <h1>Hello, {props.name}</h1>
 

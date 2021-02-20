@@ -1,6 +1,4 @@
-import { Component } from './ReactCompositeComponent';
-
-function createElement(type, props, ...children) {
+export default function createElement(type, props, ...children) {
   const vdom = {
     type,
     props,
@@ -12,9 +10,4 @@ function createElement(type, props, ...children) {
   Object.freeze(vdom.props)
   Object.freeze(vdom)
   return vdom
-}
-
-export default {
-  createElement,
-  Component
 }
